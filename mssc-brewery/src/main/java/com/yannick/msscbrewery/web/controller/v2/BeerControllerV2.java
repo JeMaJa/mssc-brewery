@@ -1,4 +1,4 @@
-package com.yannick.msscbrewery.web.controller;
+package com.yannick.msscbrewery.web.controller.v2;
 
 import java.util.UUID;
 
@@ -24,9 +24,9 @@ import com.yannick.msscbrewery.web.model.BeerDto;
 
 //requestmapping creates the basis uri, everything else will be anotated
 
-@RequestMapping("/api/v1/beer")
+@RequestMapping("/api/v2/beer")
 @RestController
-public class BeerController {
+public class BeerControllerV2 {
 	
 	@Autowired
 	private BeerService beerService;
