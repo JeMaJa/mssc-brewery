@@ -1,12 +1,18 @@
 package com.yannick.msscbrewery.web.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,9 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.yannick.msscbrewery.services.BeerService;
 import com.yannick.msscbrewery.services.CustomerService;
-import com.yannick.msscbrewery.web.model.BeerDto;
 import com.yannick.msscbrewery.web.model.CustomerDto;
 
 @RequestMapping("/api/v1/customer")
@@ -38,7 +42,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping
-	public ResponseEntity handlePost(@RequestBody CustomerDto customerDto) {
+	public ResponseEntity handlePost(@Valid @RequestBody CustomerDto customerDto) {
 		CustomerDto savedCust = customerService.saveCustomer(customerDto);
 		HttpHeaders headers = new HttpHeaders();
 		
@@ -48,7 +52,7 @@ public class CustomerController {
 	}
 	
 	@PutMapping({"/{customerId}"})
-	public ResponseEntity handlePut(@PathVariable("customerId") UUID customerId,@RequestBody  CustomerDto customerDto) {
+	public ResponseEntity handlePut(@PathVariable("customerId") UUID customerId,@RequestBody @Valid CustomerDto customerDto) {
 		customerService.updateCustomer(customerId, customerDto);
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
 		
@@ -58,6 +62,7 @@ public class CustomerController {
 	public void handleDelete(@PathVariable("customerId") UUID customerId) {
 		customerService.deleteCustomer(customerId);
 	}
+ 
 
 }
 /*
