@@ -3,9 +3,9 @@ package com.yannick.msscbrewery.web.model;
 import java.util.UUID;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Positive;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
